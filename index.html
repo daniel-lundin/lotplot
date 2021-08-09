@@ -2,6 +2,14 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+<style>
+  button {
+    padding: 10px 30px;
+    background: none;
+    border: 2px solid #99f;
+    border-radius: 10px;
+  }
+</style>
   <body>
     <button id="location">Get location</button>
     <div id="result">
@@ -9,9 +17,11 @@
       <div id="lat"></div>
       <div id="alt"></div>
     </div>
+    <div id="log">
+    </div>
     <script>
-      console.log('location', location);
       const actionButton = document.getElementById('location');
+      const logElement = document.getElementById('log');
       const lngLabel = document.getElementById('lng');
       const latLabel = document.getElementById('lat');
       const altLabel = document.getElementById('alt');
@@ -24,7 +34,11 @@
             latLabel.textContent = `lat ${position.coords.latitude}`;
             altLabel.textContent = `alt ${position.coords.altLabel}`;
           },
-          (error) => {},
+          (error) => {
+            const msg = document.createElement('p');
+            msg.textContent = error.toString();
+            logElement.appendChild(msg)
+          },
           {
             maximumAge: 0,
             enableHighAccuracy: true,
