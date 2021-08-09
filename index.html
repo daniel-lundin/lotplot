@@ -41,7 +41,7 @@
           },
           (error) => {
             const msg = document.createElement('p');
-            msg.textContent = error.toString();
+            msg.textContent = `code: ${error.code} msg: ${error.toString()}`;
             logElement.appendChild(msg)
           },
           {
