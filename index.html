@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <button id="location">Get location</button>
+    <div id="result">
+      <div id="lng"></div>
+      <div id="lat"></div>
+      <div id="alt"></div>
+    </div>
+    <script>
+      console.log('location', location);
+      const actionButton = document.getElementById('location');
+      const lngLabel = document.getElementById('lng');
+      const latLabel = document.getElementById('lat');
+      const altLabel = document.getElementById('alt');
+      actionButton.addEventListener("click", () => {
+        console.log('click');
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            console.log("got location", position);
+            lngLabel.textContent = `lng ${position.coords.longitude}`;
+            latLabel.textContent = `lat ${position.coords.latitude}`;
+            altLabel.textContent = `alt ${position.coords.altLabel}`;
+          },
+          (error) => {},
+          {
+            maximumAge: 0,
+            enableHighAccuracy: true,
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
